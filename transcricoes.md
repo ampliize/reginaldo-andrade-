@@ -44,3 +44,43 @@ Número 7. Uma empresa costuma contratar mais de um serviço como diagnóstico c
 
 Número oito, quantos funis de vendas existem hoje? Há um por serviço de consultoria ou um fluxo comum para todas as ofertas? Hoje a captação se dá através de network ou através de indicação. São as duas únicas formas de captação de clientes.
 
+## Áudio 12
+
+Número 9, quais são as etapas de cada funil na ordem? O que faz o líder passar de uma etapa para a outra? As etapas do funil são ir participar de eventos como palestrante ou como ouvinte e lá interagir com empresas que são potenciais de virar clientes. Ou empresas que usufruíram dos serviços e indicam para outras empresas e o processo de fechamento dos novos contratos acontece, mas não é algo estruturado.
+
+## Áudio 13
+
+Número 10, de onde vem os leads? Indicações, LinkedIn, anúncios, conteúdo orgânico ou base antiga? E qual é o volume de cada origem? Vem através de network e através de indicações. E o volume é baixo. É um volume que ainda está insatisfatório porque não atende a capacidade produtiva.
+
+## Áudio 14
+
+Número 11, por onde o líder entra em contato? Geralmente pelo WhatsApp. Mas às vezes pelo Instagram, raras vezes.
+
+## Áudio 15
+
+Número 12, quantas empresas interessadas chegam por mês e quantos contratam por serviço? Oscila bastante, já que não tem um funil bem estruturado. Então, às vezes, três, quatro, cinco empresas por mês.
+
+## Áudio 16
+
+Número 13, em qual etapa vocês mais perdem leads? Porque, na visão de vocês, os leads são perdidos mais na etapa de necessidade de follow-up. Termina esquecendo o lead e deixado de lado.
+
+## Áudio 17
+
+Número 14, qual é o tíquete médio e quanto tempo passa entre o primeiro contato e o fechamento? O tíquete médio é de R$ 10 mil, para o pacote de 40 horas de auxílio. E a média de tempo do primeiro contato até o fechamento, geralmente são dois encontros. Um de diagnóstico e outro de geração de orçamento e negociação de fechamento.
+
+## Áudio 18
+
+Número 15, quem atende os líderes hoje? Quantas pessoas e em que horário? Os líderes são atendidos hoje por mim, mas serão atendidos por mim e por minha noiva. Em diferentes horários. Em um horário que eu tiver com o tempo disponível, eu atendo. Em um horário que ela tiver com o tempo disponível, ela atende.
+
+## Áudio 19
+
+Número 15, quem atende os líderes hoje? Quantas pessoas e em que horário? Os líderes são atendidos hoje por mim, mas serão atendidos por mim e por minha noiva. Em diferentes horários. Em um horário que eu tiver com o tempo disponível, eu atendo. Em um horário que ela tiver com o tempo disponível, ela atende.
+
+## Áudio 20
+
+Número 15, quem atende os líderes hoje? Quantas pessoas e em que horário? Os líderes são atendidos hoje por mim, mas serão atendidos por mim e por minha noiva. Em diferentes horários. Em um horário que eu tiver com o tempo disponível, eu atendo. Em um horário que ela tiver com o tempo disponível, ela atende.
+
+## Áudio 21
+
+Número 16, em quanto tempo o líder recebe a primeira resposta? Se eu estiver em atendimento, pode chegar até um dia de espera, porque no final do dia do atendimento é que eu vou olhar quem entrou em contato e responder.
+
