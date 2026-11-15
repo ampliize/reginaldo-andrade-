@@ -164,3 +164,47 @@ Número 35, com que nome o agente deve se apresentar e como deve informar que é
 
 Número 35, com que nome o agente deve se apresentar e como deve informar que é o assistente virtual da consultoria do Reginaldo. Pode se identificar como Pedro e se apresentar como responsável pelo atendimento e que estará conduzindo da melhor forma o processo de orientação.
 
+## Áudio 42
+
+Número 35, com que nome o agente deve se apresentar e como deve informar que é o assistente virtual da consultoria do Reginaldo. Pode se identificar como Pedro e se apresentar como responsável pelo atendimento e que estará conduzindo da melhor forma o processo de orientação.
+
+## Áudio 43
+
+Número 36, qual é o tom da voz da marca? Mais formal ou mais próximo? Tom mais formal.
+
+## Áudio 44
+
+Número 37. O agente deve enviar áudios, se sim, com a voz de quem? Pode enviar áudios com a voz de Reginaldo.
+
+## Áudio 45
+
+Número 38. Em que horários o agente atende sozinho e quando deve chamar um humano? Enquanto as pessoas estão tirando dúvidas sobre os serviços, atende sozinho e quando ela for falar sobre a particularidade da empresa dela, chama o humano.
+
+## Áudio 46
+
+Número 39, o que o agente nunca deve dizer ou prometer sobre mudanças de comportamento, desempenho das equipes ou prazo de resultados. Ele nunca deve prometer resultados que não estejam condicionados à postura dos líderes e às decisões que a empresa tem que tomar relacionado à formatação da equipe.
+
+## Áudio 47
+
+Número 39, o que o agente nunca deve dizer ou prometer sobre mudanças de comportamento, desempenho das equipes ou prazo de resultados. Ele nunca deve prometer resultados que não estejam condicionados à postura dos líderes e às decisões que a empresa tem que tomar relacionado à formatação da equipe.
+
+## Áudio 48
+
+Número 40. Qual texto de privacidade ou consentimento vocês apresentam aos contratos durante o atendimento comercial? Não há um texto de privacidade ou consentimento apresentado.
+
+## Áudio 49
+
+Número 40. Qual texto de privacidade ou consentimento vocês apresentam aos contratos durante o atendimento comercial? Não há um texto de privacidade ou consentimento apresentado.
+
+## Áudio 50
+
+Número 41, Reginaldo aprovará os roteiros e responderá as dúvidas durante a construção ou haverá outro responsável. Serão responsáveis Reginaldo e Larissa.
+
+## Áudio 51
+
+Número 42, o que seria um bom resultado nos primeiros 90 dias, considerando empresas qualificadas, reuniões realizadas, propostas enviadas e contratos fechados? Cinco, 15 contratos em 90 dias é um número muito bom.
+
+## Áudio 52
+
+Número 43, qual serviço ou oferta de consultoria deve entrar em operação primeiro? Primeiro, análise de perfil comportamental. Segundo, a elaboração e implantação do manual de cultura. Terceiro, processo seletivo. Quarto, treinamento e desenvolvimento da equipe.
+
