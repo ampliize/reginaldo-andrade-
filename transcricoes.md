@@ -84,3 +84,39 @@ Número 15, quem atende os líderes hoje? Quantas pessoas e em que horário? Os 
 
 Número 16, em quanto tempo o líder recebe a primeira resposta? Se eu estiver em atendimento, pode chegar até um dia de espera, porque no final do dia do atendimento é que eu vou olhar quem entrou em contato e responder.
 
+## Áudio 22
+
+Número 17, qual é o roteiro do primeiro atendimento? Quais mensagens de abertura e perguntas são usadas para entender a demanda da empresa? Primeiro é solicitar do gestor o quanto ele está contente com a equipe que ele tem, o quanto ele está contente com as normas que estão aplicadas e fazendo o funcionamento da empresa que ele tem. Depois é que serão elencadas as possibilidades de melhorias.
+
+## Áudio 23
+
+Número 18, que informações precisam ser levantadas antes de propor a consultoria? Como o desafio da equipe, tamanho do grupo, urgência, orçamento e quem decide a contratação? As informações que precisam ser levadas em consideração é se a empresa já aplica alguma estrutura de normativa, se ela já tem algum processo que trata sobre pessoas e, geralmente, quem decide a contratação é o proprietário da empresa.
+
+## Áudio 24
+
+Número 19. Quais são as objeções mais comuns e como vocês respondem a cada uma? As objeções mais comuns são só preço, depois a gente faz, deixar mais para frente, porque geralmente as empresas precisam desse tipo de serviço. Então, aí algumas empresas só ficam amarradas em preço. E relacionado à quebra da objeção preço, eu trago possibilidades e facilidades de pagamento. Mas a principal objeção é só preço mesmo.
+
+## Áudio 25
+
+Número 20, em que momento o preço é apresentado? Como é definida a proposta personalizada? E quais são os limites de desconto ou negociação? O preço é apresentado após o diagnóstico de quais são as necessidades da empresa. A proposta é feita de acordo com o que foi levantado enquanto necessidades. E a negociação pode gerar um desconto de até 30%.
+
+## Áudio 26
+
+Número 20, em que momento o preço é apresentado? Como é definida a proposta personalizada? E quais são os limites de desconto ou negociação? O preço é apresentado após o diagnóstico de quais são as necessidades da empresa. A proposta é feita de acordo com o que foi levantado enquanto necessidades. E a negociação pode gerar um desconto de até 30%.
+
+## Áudio 27
+
+Número 21, como é o follow-up de quem parou de responder? Quantas tentativas e com que intervalo? Não tem um critério para follow-up e nem tem uma estruturação de quantas vezes é para entrar em contato com essa pessoa e nem qual é o intervalo de tempo para recontactar.
+
+## Áudio 28
+
+Número 22, podem compartilhar exemplos de conversas de vendas fechadas e perdidas, em prints ou exportações com os dados pessoais ocultados? Sim. Depois eu vou separar direitinho e envio aqui. Mas raramente vem o fechamento por mensagem. Geralmente o fechamento é depois de uma reunião. Aí as conversas que podem ser direcionadas ou não à reunião.
+
+## Áudio 29
+
+Número 23, como a consultoria é contratada hoje da reunião e aprovação da proposta até a assinatura e o pagamento? Quais os meios de pagamento são aceitos? É feita a reunião de apresentação e diagnóstico, depois é gerado o contrato. Depois que o contrato foi gerado, a empresa paga integralmente o pacote, se foi negociado para ser à vista, ou paga parcelado via Pix ou via cartão de crédito.
+
+## Áudio 30
+
+Número 24, qual plataforma de pagamento vocês usam? Pix ou Mercado Pago?
+
