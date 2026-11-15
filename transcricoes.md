@@ -120,3 +120,47 @@ Número 23, como a consultoria é contratada hoje da reunião e aprovação da p
 
 Número 24, qual plataforma de pagamento vocês usam? Pix ou Mercado Pago?
 
+## Áudio 31
+
+Número 25, até onde a gente pode avançar sozinho? Em que momento deve encaminhar o líder para Reginaldo ou outra pessoa, por exemplo, para uma reunião de diagnóstico ou negociação? Quando o líder demonstrar interesse em entender como é o diagnóstico da empresa que ele tem. Até quando ele for tirando dúvidas sobre os serviços, dá para ficar programado com vocês. Mas quando ele agora quiser marcar uma reunião, um bate-papo para trazer ações pontuais sobre a empresa dele, é o momento da reunião.
+
+## Áudio 32
+
+Número 26, o que acontece após a contratação e o primeiro pagamento? Quem assume a empresa e organiza a reunião inicial? Reginaldo, que assume a empresa e organiza a reunião inicial, assim como todas as outras ações posteriores.
+
+## Áudio 33
+
+Número 27, onde ficam registrados o valor da proposta e o valor da venda fechada, para acompanhar a conversão comercial. Geralmente ficam registrados via WhatsApp.
+
+## Áudio 34
+
+Número 28, o que conta como venda concluída para o CRM? Proposta aprovada, contrato assinado, pagamento confirmado ou uma combinação desses marcos? Pagamento confirmado.
+
+## Áudio 35
+
+Número 29, qual CRM vocês usam? Podemos ter acesso de administrador ou uma chave de API. Não usamos ainda CRM.
+
+## Áudio 36
+
+Número 30, quais funis e etapas são cadastrados no CRM hoje? Eles batem com o processo real? Não há utilização de funis e nem de CRM hoje.
+
+## Áudio 37
+
+Número 32, qual o número de WhatsApp os agentes vão usar? Ele já está na API oficial. O número será 7999933769. Não sei se já está na API oficial.
+
+## Áudio 38
+
+Número 33. Que outras ferramentas entram no processo? Planilha, assinatura de contrato, disparo de mensagens? Nenhuma ferramenta bem estruturada.
+
+## Áudio 39
+
+Número 34, existe uma base de leads antigos, quantos são, onde estão e de que período? Só existe no WhatsApp pessoal, meu, de Reginaldo, pessoas que eu contatei ou que eu tive alguma relação de networking em eventos, mas nada é estruturado em uma plataforma.
+
+## Áudio 40
+
+Número 35, com que nome o agente deve se apresentar e como deve informar que é o assistente virtual da consultoria do Reginaldo. Pode se identificar como Pedro e se apresentar como responsável pelo atendimento e que estará conduzindo da melhor forma o processo de orientação.
+
+## Áudio 41
+
+Número 35, com que nome o agente deve se apresentar e como deve informar que é o assistente virtual da consultoria do Reginaldo. Pode se identificar como Pedro e se apresentar como responsável pelo atendimento e que estará conduzindo da melhor forma o processo de orientação.
+
