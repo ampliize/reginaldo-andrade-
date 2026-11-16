@@ -10,14 +10,26 @@ type Status = {
   error?: string;
 };
 
+// O CRM não guarda nenhuma chave secreta: ele chama um webhook do n8n (URL salva em config_bot),
+// e o n8n fala com a Evolution usando a credencial dele. O n8n valida o login pelo token do Supabase.
 async function api(method: "GET" | "POST", body?: object) {
-  const { data } = await supabase.auth.getSession();
-  const res = await fetch("/api/whatsapp", {
-    method,
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${data.session?.access_token ?? ""}` },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  return res.json();
+  const [{ data: sess }, { data: cfg }] = await Promise.all([
+    supabase.auth.getSession(),
+    supabase.from("config_bot").select("valor").eq("chave", "n8n_webhook_whatsapp_url").maybeSingle(),
+  ]);
+  const url = (cfg?.valor as string) || "";
+  if (!url) return { error: "Webhook do n8n ainda não configurado (n8n_webhook_whatsapp_url)." };
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${sess.session?.access_token ?? ""}` },
+      body: JSON.stringify(method === "GET" ? { action: "status" } : body),
+    });
+    if (res.status === 401) return { error: "Sessão inválida. Saia e entre de novo." };
+    return await res.json();
+  } catch {
+    return { error: "Não foi possível falar com o n8n. Verifique se o workflow de conexão está ativo." };
+  }
 }
 
 export default function ConfigPage() {
@@ -90,7 +102,7 @@ function Inner() {
     <>
       <div className="page-head"><h1>Configurações</h1></div>
 
-      <div className="grid two">
+      <div className="grid two" style={{ marginBottom: 16 }}>
         <div className="card">
           <h3>WhatsApp do atendimento</h3>
           {!st ? <div className="muted">Verificando conexão…</div> : st.error ? (
@@ -150,6 +162,58 @@ function Inner() {
           <p className="muted">Mantenha o celular com internet. Se o WhatsApp desconectar, gere um novo QR Code aqui.</p>
         </div>
       </div>
+      <ConfigEditor />
     </>
+  );
+}
+
+type Cfg = { chave: string; valor: unknown; descricao: string | null };
+
+function ConfigEditor() {
+  const [rows, setRows] = useState<Cfg[]>([]);
+  const [draft, setDraft] = useState<Record<string, string>>({});
+  const [saved, setSaved] = useState("");
+
+  const load = useCallback(() => {
+    supabase.from("config_bot").select("chave,valor,descricao").order("chave").then(({ data }) => {
+      const r = (data as Cfg[]) ?? [];
+      setRows(r);
+      setDraft(Object.fromEntries(r.map((x) => [x.chave, typeof x.valor === "string" ? x.valor : JSON.stringify(x.valor)])));
+    });
+  }, []);
+  useEffect(load, [load]);
+
+  async function save(c: Cfg) {
+    const raw = draft[c.chave];
+    let valor: unknown = raw;
+    if (typeof c.valor !== "string") {
+      try { valor = JSON.parse(raw); } catch { setSaved(`Valor inválido em ${c.chave}`); return; }
+    }
+    const { error } = await supabase.from("config_bot").update({ valor }).eq("chave", c.chave);
+    setSaved(error ? `Erro ao salvar ${c.chave}` : `${c.chave} salvo.`);
+    load();
+  }
+
+  return (
+    <div className="card">
+      <h3>Parâmetros do agente</h3>
+      <div className="table-wrap">
+        <table>
+          <thead><tr><th>Parâmetro</th><th>Valor</th><th></th></tr></thead>
+          <tbody>
+            {rows.map((c) => (
+              <tr key={c.chave}>
+                <td style={{ maxWidth: 320 }}><b>{c.chave}</b><div className="muted" style={{ fontSize: 12 }}>{c.descricao}</div></td>
+                <td style={{ minWidth: 260 }}>
+                  <input style={{ width: "100%" }} value={draft[c.chave] ?? ""} onChange={(e) => setDraft({ ...draft, [c.chave]: e.target.value })} />
+                </td>
+                <td><button className="btn" onClick={() => save(c)}>Salvar</button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {saved && <p className="muted">{saved}</p>}
+    </div>
   );
 }

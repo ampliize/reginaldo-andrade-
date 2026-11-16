@@ -59,6 +59,20 @@ Isso cobre também quem agendar direto pelo link do cal.com.
 - **Lembrete da reunião**: 24 h e 1 h antes (consulta `meetings` com `status in ('agendada','remarcada')`), com o link do Meet.
 - Respeitar horário: follow-ups só entre 8h e 20h, de segunda a sábado.
 
+## Workflow 4 — "Pedro | Conexão WhatsApp" (gatilho: Webhook chamado pelo CRM)
+
+Mesmo padrão do CRM da Cabelos by Karol: **o CRM não guarda nenhuma chave**. A URL deste webhook fica em `config_bot.n8n_webhook_whatsapp_url`; a chave da Evolution fica só na credencial do n8n.
+
+1. **Webhook** `POST /pedro-whatsapp` (CORS liberado para o domínio do CRM) — corpo `{ action: "status" | "connect" | "logout" | "webhook" }`.
+2. **Valida o login**: HTTP GET `https://hnxqeccyasyyajtwlbal.supabase.co/auth/v1/user` com o `Authorization` recebido + header `apikey` (publishable). Se não for 200 → responde 401.
+3. **Lê `config_bot`** (`evolution_base_url`, `evolution_instancia`, `n8n_webhook_atendimento_url`).
+4. **Switch action** (Evolution API v2, header `apikey` da credencial):
+   - `status` → `GET /instance/connectionState/{instancia}` (+ `fetchInstances` quando `open`) → `{ state, number, profileName }`
+   - `connect` → se a instância não existe, `POST /instance/create` (com o webhook do atendimento); senão `GET /instance/connect/{instancia}` → `{ qr, pairingCode }` (ou `{ connected: true }`)
+   - `logout` → `DELETE /instance/logout/{instancia}`
+   - `webhook` → `POST /webhook/set/{instancia}` apontando para `n8n_webhook_atendimento_url`
+5. **Respond to Webhook** com o JSON.
+
 ---
 
 ## Regras de comportamento garantidas pelo sistema (não só pelo prompt)
@@ -80,8 +94,9 @@ Isso cobre também quem agendar direto pelo link do cal.com.
 
 | Serviço | O que precisamos |
 |---|---|
-| Supabase | URL `https://hnxqeccyasyyajtwlbal.supabase.co` + **service_role key** (só no n8n, nunca no CRM) |
-| Evolution API | URL do servidor e API key global. A instância `reginaldo` é criada e conectada pelo próprio CRM (Configurações → Gerar QR Code), que também aponta o webhook para o n8n. |
+| Supabase | URL `https://hnxqeccyasyyajtwlbal.supabase.co` + **service_role key** numa credencial do n8n (nunca no CRM) |
+| CRM (Vercel) | Nenhuma variável de ambiente: a URL e a chave publicável do Supabase são públicas e estão no código; o resto fica em `config_bot`. |
+| Evolution API | API key global numa credencial do n8n. A URL vai em `config_bot.evolution_base_url`. A instância `reginaldo` é criada e conectada pelo CRM (Configurações → Gerar QR Code). |
 | OpenAI | API key (AI Agent + transcrição dos áudios) |
 | cal.com | API key + ID do event type "Diagnóstico — 30 min" (com Google Meet e o Google Agenda do Reginaldo conectados) |
 | Notificação | Números de WhatsApp do Reginaldo e da Larissa |

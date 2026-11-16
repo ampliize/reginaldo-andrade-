@@ -1,9 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 
-export const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// URL e chave publicável são públicas por natureza (a segurança vem do login + RLS).
+// Ficam no código para o deploy na Vercel não precisar de variáveis de ambiente.
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://hnxqeccyasyyajtwlbal.supabase.co";
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_3ubG_t5v3GhDUsCcfI3Kfw_4z-NeWCG";
+
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export type Stage =
   | "novo" | "em_atendimento" | "qualificado" | "desqualificado"
