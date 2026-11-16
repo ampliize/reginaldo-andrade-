@@ -100,3 +100,19 @@ Mesmo padrão do CRM da Cabelos by Karol: **o CRM não guarda nenhuma chave**. A
 | OpenAI | API key (AI Agent + transcrição dos áudios) |
 | cal.com | API key + ID do event type "Diagnóstico — 30 min" (com Google Meet e o Google Agenda do Reginaldo conectados) |
 | Notificação | Números de WhatsApp do Reginaldo e da Larissa |
+
+---
+
+## Workflows criados no n8n (n8n-n8n.dgwpoe.easypanel.host)
+
+| Workflow | ID | Gatilho | Status |
+|---|---|---|---|
+| RGN · WhatsApp Conexão | `vg3LxtyZGn0WdFw8` | Webhook `/webhook/rgn-whatsapp-conexao-m3q8v1` (CRM) | publicado |
+| RGN · WA Entrada | `khFXALT46S2Pbma7` | Webhook `/webhook/rgn-wa-entrada-k7p2x9` (Evolution) | publicado |
+| RGN · Agente Pedro | `bR6RmY6TyBE9lZhI` | sub-workflow | publicado |
+| RGN · WA Enviar | `6hjjxaoT74TnPnvL` | sub-workflow | publicado |
+| RGN · Transferir para equipe | `etramJI63tzDnfZt` | sub-workflow / ferramenta | publicado |
+| RGN · Agenda (cal.com) | `6EE4XRk3jeTPEw43` | sub-workflow / ferramenta | publicado — falta credencial `Calcom Reginaldo` e `calcom_event_type_id` |
+| RGN · Follow-up e lembretes | `xNEOVfMVV3I8yHfs` | a cada 15 min (fuso Aracaju) | publicado |
+
+Credenciais usadas: `Supabase Reginaldo`, `Evolution Reginaldo`, `OpenAI Reginaldo` (+ `Calcom Reginaldo`, a criar). Modelo: `gpt-5-mini`.
