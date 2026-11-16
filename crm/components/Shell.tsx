@@ -10,6 +10,7 @@ const NAV = [
   { href: "/leads", label: "Leads" },
   { href: "/transbordos", label: "Transbordos", badge: true },
   { href: "/agenda", label: "Agenda" },
+  { href: "/configuracoes", label: "Configurações" },
 ];
 
 export default function Shell({ children }: { children: React.ReactNode }) {
