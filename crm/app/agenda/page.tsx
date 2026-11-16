@@ -45,7 +45,7 @@ function Inner() {
           <button className={tab === "passadas" ? "on" : ""} onClick={() => setTab("passadas")}>Passadas</button>
         </div>
       </div>
-      <div className="card table-wrap">
+      <div className="card p0 table-wrap">
         <table>
           <thead><tr><th>Quando</th><th>Lead</th><th>Empresa</th><th>Desafio</th><th>Status</th><th></th></tr></thead>
           <tbody>

@@ -3,21 +3,32 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
+import { CalendarDays, Columns3, LayoutDashboard, LifeBuoy, LogOut, MessagesSquare, Settings, Users } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { Avatar } from "./ui";
 
-const NAV = [
-  { href: "/", label: "Painel" },
-  { href: "/leads", label: "Leads" },
-  { href: "/transbordos", label: "Transbordos", badge: true },
-  { href: "/agenda", label: "Agenda" },
-  { href: "/configuracoes", label: "Configurações" },
+type Counts = { transbordos: number; naoLidas: number };
+
+const GROUPS = [
+  { label: "Visão geral", items: [{ href: "/", label: "Painel", icon: LayoutDashboard }] },
+  {
+    label: "Comercial",
+    items: [
+      { href: "/pipeline", label: "Pipeline", icon: Columns3 },
+      { href: "/conversas", label: "Conversas", icon: MessagesSquare, count: "naoLidas" as const },
+      { href: "/transbordos", label: "Transbordos", icon: LifeBuoy, count: "transbordos" as const, alert: true },
+      { href: "/agenda", label: "Agenda", icon: CalendarDays },
+      { href: "/leads", label: "Leads", icon: Users },
+    ],
+  },
+  { label: "Sistema", items: [{ href: "/configuracoes", label: "Configurações", icon: Settings }] },
 ];
 
-export default function Shell({ children }: { children: React.ReactNode }) {
+export default function Shell({ children, flush }: { children: React.ReactNode; flush?: boolean }) {
   const router = useRouter();
   const path = usePathname();
   const [session, setSession] = useState<Session | null | undefined>(undefined);
-  const [open, setOpen] = useState(0);
+  const [counts, setCounts] = useState<Counts>({ transbordos: 0, naoLidas: 0 });
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -25,43 +36,59 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     return () => sub.subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    if (session === null) router.replace("/login");
-  }, [session, router]);
+  useEffect(() => { if (session === null) router.replace("/login"); }, [session, router]);
 
   useEffect(() => {
     if (!session) return;
-    const load = () =>
-      supabase.from("handoffs").select("id", { count: "exact", head: true }).eq("status", "aberto")
-        .then(({ count }) => setOpen(count ?? 0));
+    const load = async () => {
+      const [h, n] = await Promise.all([
+        supabase.from("handoffs").select("id", { count: "exact", head: true }).eq("status", "aberto"),
+        supabase.rpc("crm_inbox", { p_filtro: "nao_lidas", p_busca: null }),
+      ]);
+      setCounts({ transbordos: h.count ?? 0, naoLidas: (n.data as unknown[] | null)?.length ?? 0 });
+    };
     load();
-    const ch = supabase.channel("shell-handoffs")
+    const ch = supabase.channel("shell-counts")
       .on("postgres_changes", { event: "*", schema: "public", table: "handoffs" }, load)
+      .on("postgres_changes", { event: "*", schema: "public", table: "leads" }, load)
       .subscribe();
     return () => { supabase.removeChannel(ch); };
   }, [session]);
 
   if (!session) return <div className="login muted">Carregando…</div>;
+  const email = session.user.email ?? "";
 
   return (
     <div className="app">
       <aside className="sidebar">
-        <div className="brand">Consultoria Reginaldo<small>CRM do atendimento</small></div>
-        <nav className="nav">
-          {NAV.map((n) => {
-            const active = n.href === "/" ? path === "/" : path.startsWith(n.href);
-            return (
-              <Link key={n.href} href={n.href} className={active ? "active" : ""}>
-                {n.label}
-                {n.badge && open > 0 && <span className="badge warn">{open}</span>}
-              </Link>
-            );
-          })}
-        </nav>
+        <div className="brand">
+          <span className="brand-mark">R</span>
+          <div><b>Consultoria Reginaldo</b><small>CRM comercial</small></div>
+        </div>
+        {GROUPS.map((g) => (
+          <nav className="nav" key={g.label}>
+            <div className="nav-label">{g.label}</div>
+            {g.items.map((n) => {
+              const active = n.href === "/" ? path === "/" : path.startsWith(n.href);
+              const Icon = n.icon;
+              const c = "count" in n && n.count ? counts[n.count] : 0;
+              return (
+                <Link key={n.href} href={n.href} className={active ? "active" : ""}>
+                  <Icon size={18} />{n.label}
+                  {c > 0 && <span className={`count ${"alert" in n && n.alert ? "" : "soft"}`}>{c}</span>}
+                </Link>
+              );
+            })}
+          </nav>
+        ))}
         <div className="spacer" />
-        <button className="btn" onClick={() => supabase.auth.signOut()}>Sair</button>
+        <div className="me">
+          <Avatar name={email} size="sm" />
+          <span className="who" title={email}>{email}</span>
+          <button className="btn ghost sm" title="Sair" onClick={() => supabase.auth.signOut()}><LogOut size={16} /></button>
+        </div>
       </aside>
-      <main className="main">{children}</main>
+      <main className={`main ${flush ? "flush" : ""}`}>{children}</main>
     </div>
   );
 }

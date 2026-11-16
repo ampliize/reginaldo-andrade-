@@ -22,6 +22,7 @@ export type Lead = {
   followup_count: number; first_message_at: string | null; first_response_at: string | null;
   last_inbound_at: string | null; last_outbound_at: string | null; qualified_at: string | null;
   scheduled_at: string | null; notes: string | null; created_at: string; updated_at: string;
+  stage_changed_at: string; team_seen_at: string | null;
 };
 
 export type Message = {

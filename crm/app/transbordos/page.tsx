@@ -46,9 +46,9 @@ function Inner() {
       </div>
       <p className="muted" style={{ marginTop: -8 }}>
         Quando a IA não sabe responder ou o lead precisa de uma pessoa, o atendimento automático é pausado e o lead aparece aqui.
-        Responda pelo WhatsApp e clique em “Devolver para a IA” para o Pedro continuar.
+        Responda pela tela de Conversas (ou pelo WhatsApp) e clique em “Devolver para a IA” para o Pedro continuar.
       </p>
-      <div className="card table-wrap">
+      <div className="card p0 table-wrap">
         <table>
           <thead><tr><th>Lead</th><th>Motivo</th><th>Resumo para a equipe</th><th>{tab === "aberto" ? "Esperando há" : "Devolvido"}</th><th></th></tr></thead>
           <tbody>
@@ -58,7 +58,7 @@ function Inner() {
                 <td><span className="badge warn">{label(r.reason)}</span></td>
                 <td style={{ maxWidth: 420 }}>{r.summary ?? "—"}</td>
                 <td>{tab === "aberto" ? fmtDuration((Date.now() - new Date(r.opened_at).getTime()) / 1000) : <>{fmtDateTime(r.returned_at)}<div className="muted">{r.returned_by}</div></>}</td>
-                <td>{tab === "aberto" && <button className="btn primary" onClick={() => giveBack(r.lead_id)}>Devolver para a IA</button>}</td>
+                <td style={{ whiteSpace: "nowrap" }}>{tab === "aberto" && <><Link className="btn sm" href={`/conversas?lead=${r.lead_id}`}>Responder</Link>{" "}<button className="btn sm primary" onClick={() => giveBack(r.lead_id)}>Devolver para a IA</button></>}</td>
               </tr>
             ))}
             {rows.length === 0 && <tr><td colSpan={5} className="muted">{tab === "aberto" ? "Nenhum lead aguardando a equipe." : "Nenhum transbordo devolvido."}</td></tr>}

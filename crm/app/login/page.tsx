@@ -22,7 +22,7 @@ export default function Login() {
   return (
     <div className="login">
       <form className="card" onSubmit={submit}>
-        <div className="brand" style={{ padding: 0 }}>Consultoria Reginaldo<small>CRM do atendimento</small></div>
+        <div className="brand" style={{ padding: "0 0 8px" }}><span className="brand-mark">R</span><div><b>Consultoria Reginaldo</b><small>CRM comercial</small></div></div>
         <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} required />
         {error && <div style={{ color: "var(--danger)" }}>{error}</div>}

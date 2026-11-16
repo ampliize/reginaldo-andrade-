@@ -29,7 +29,7 @@ const DICT: Record<string, string> = {
   criado: "Primeiro contato", etapa: "Mudou de etapa", ia_pausada: "IA pausada (transbordo)",
   ia_retomada: "Devolvido para a IA", followup: "Follow-up enviado",
   reuniao_agendada: "Reunião agendada", reuniao_remarcada: "Reunião remarcada",
-  reuniao_cancelada: "Reunião cancelada", reuniao_realizada: "Reunião realizada", reuniao_no_show: "Não compareceu",
+  reuniao_cancelada: "Reunião cancelada", lembrete_reuniao: "Lembrete de reunião enviado", erro: "Erro técnico", reuniao_realizada: "Reunião realizada", reuniao_no_show: "Não compareceu",
 };
 export const label = (k: string | null | undefined) => (k ? DICT[k] ?? k : "—");
 
