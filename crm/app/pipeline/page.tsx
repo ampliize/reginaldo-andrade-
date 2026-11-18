@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Bot, Building2, Clock, Hand, Search, Users } from "lucide-react";
 import Shell from "@/components/Shell";
@@ -21,6 +21,7 @@ function scoreColor(s: number) {
 }
 
 function Pipeline() {
+  const router = useRouter();
   const [leads, setLeads] = useState<Lead[]>([]);
   const [inbox, setInbox] = useState<Record<string, Inbox>>({});
   const [q, setQ] = useState("");
@@ -82,7 +83,7 @@ function Pipeline() {
       <div className="page-head">
         <div>
           <h1>Pipeline</h1>
-          <p>Arraste os cards entre as etapas. O Pedro move os leads sozinho até o agendamento.</p>
+          <p>Arraste os cards entre as etapas (no celular, use “Mover” no card). O Pedro move os leads sozinho até o agendamento.</p>
         </div>
         <div className="toolbar">
           <div className="search"><Search size={16} /><input placeholder="Buscar lead ou empresa" value={q} onChange={(e) => setQ(e.target.value)} /></div>
@@ -124,9 +125,12 @@ function Pipeline() {
                 {items.map((l) => {
                   const ib = inbox[l.id];
                   return (
-                    <Link
+                    <div
                       key={l.id}
-                      href={`/leads/${l.id}`}
+                      role="link"
+                      tabIndex={0}
+                      onClick={() => router.push(`/leads/${l.id}`)}
+                      onKeyDown={(e) => { if (e.key === "Enter") router.push(`/leads/${l.id}`); }}
                       draggable
                       onDragStart={(e) => { e.dataTransfer.setData("text/plain", l.id); setDrag(l.id); }}
                       onDragEnd={() => setDrag(null)}
@@ -148,7 +152,16 @@ function Pipeline() {
                         {ib?.nao_lida && <span className="badge ok">nova msg</span>}
                         <span className="sp"><Clock size={11} />{timeAgo(l.stage_changed_at)}</span>
                       </div>
-                    </Link>
+                      <select
+                        className="move-sm"
+                        aria-label="Mover para outra etapa"
+                        value={l.stage}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={(e) => move(l.id, e.target.value as Stage)}
+                      >
+                        {STAGES.map((s) => <option key={s.key} value={s.key}>Mover: {s.label}</option>)}
+                      </select>
+                    </div>
                   );
                 })}
               </div>

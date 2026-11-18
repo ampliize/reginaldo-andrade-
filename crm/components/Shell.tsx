@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { CalendarDays, Columns3, LayoutDashboard, LifeBuoy, LogOut, MessagesSquare, Settings, Users } from "lucide-react";
+import { CalendarDays, Columns3, LayoutDashboard, LifeBuoy, LogOut, Menu, MessagesSquare, Settings, Users, X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Avatar } from "./ui";
 
@@ -29,6 +29,9 @@ export default function Shell({ children, flush }: { children: React.ReactNode; 
   const path = usePathname();
   const [session, setSession] = useState<Session | null | undefined>(undefined);
   const [counts, setCounts] = useState<Counts>({ transbordos: 0, naoLidas: 0 });
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => { setOpen(false); }, [path]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -59,8 +62,16 @@ export default function Shell({ children, flush }: { children: React.ReactNode; 
   const email = session.user.email ?? "";
 
   return (
-    <div className="app">
+    <div className={`app ${open ? "menu-open" : ""}`}>
+      <header className="topbar">
+        <button className="btn ghost sm" aria-label="Abrir menu" onClick={() => setOpen(true)}><Menu size={20} /></button>
+        <span className="brand-mark sm">R</span>
+        <b>Consultoria Reginaldo</b>
+        {counts.transbordos + counts.naoLidas > 0 && <span className="count">{counts.transbordos + counts.naoLidas}</span>}
+      </header>
+      <div className="scrim" onClick={() => setOpen(false)} />
       <aside className="sidebar">
+        <button className="btn ghost sm close-menu" aria-label="Fechar menu" onClick={() => setOpen(false)}><X size={20} /></button>
         <div className="brand">
           <span className="brand-mark">R</span>
           <div><b>Consultoria Reginaldo</b><small>CRM comercial</small></div>

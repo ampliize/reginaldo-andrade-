@@ -78,13 +78,13 @@ function LeadInner() {
           <select value={lead.stage} onChange={(e) => changeStage(e.target.value as Stage)}>
             {STAGES.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}
           </select>
-          <Link className="btn" href={`/conversas?lead=${lead.id}`}><MessagesSquare size={15} />Abrir em Conversas</Link>
+          <Link className="btn" href={`/conversas?lead=${lead.id}`}><MessagesSquare size={15} /><span className="hide-sm">Abrir em </span>Conversas</Link>
           <a className="btn" href={`https://wa.me/${lead.phone}`} target="_blank" rel="noreferrer"><MessageCircle size={15} />WhatsApp</a>
         </div>
       </div>
 
       <div className="grid three">
-        <div className="card p0" style={{ display: "flex", flexDirection: "column", overflow: "hidden", height: "calc(100vh - 190px)", minHeight: 520 }}>
+        <div className="card p0 chat-card">
           <AiStrip lead={lead} reason={handoff?.reason} onChange={load} />
           {handoff?.summary && lead.ai_paused && <div style={{ padding: "8px 16px", fontSize: 13, borderBottom: "1px solid var(--border)" }}><b>Resumo do Pedro:</b> {handoff.summary}</div>}
           <div style={{ background: "var(--panel-2)", flex: 1, minHeight: 0, display: "flex" }}><Messages msgs={msgs} /></div>

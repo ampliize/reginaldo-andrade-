@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
-import { Bot, ExternalLink, Hand, MessagesSquare, Search } from "lucide-react";
+import { ArrowLeft, Bot, ExternalLink, Hand, MessagesSquare, Search } from "lucide-react";
 import Shell from "@/components/Shell";
 import { AiStrip, Composer, Messages } from "@/components/Chat";
 import { Avatar, Empty, StageBadge, timeAgo } from "@/components/ui";
@@ -49,11 +49,11 @@ function Inbox() {
   }, [load]);
 
   useEffect(() => {
-    if (!selected && rows.length && typeof window !== "undefined" && window.innerWidth > 900) router.replace(`/conversas?lead=${rows[0].id}`);
-  }, [selected, rows, router]);
+    if (!selected && !params.get("lista") && rows.length && typeof window !== "undefined" && window.innerWidth > 900) router.replace(`/conversas?lead=${rows[0].id}`);
+  }, [selected, rows, router, params]);
 
   return (
-    <div className="inbox">
+    <div className={`inbox ${selected ? "has-sel" : ""}`}>
       <div className="inbox-list">
         <div className="head">
           <h1>Conversas</h1>
@@ -79,14 +79,14 @@ function Inbox() {
           ))}
         </div>
       </div>
-      {selected ? <Thread key={selected} id={selected} /> : (
+      {selected ? <Thread key={selected} id={selected} onBack={() => router.replace("/conversas?lista=1")} /> : (
         <div className="thread"><Empty icon={<MessagesSquare size={32} />} title="Selecione uma conversa">Escolha um lead à esquerda para ver e responder a conversa.</Empty></div>
       )}
     </div>
   );
 }
 
-function Thread({ id }: { id: string }) {
+function Thread({ id, onBack }: { id: string; onBack: () => void }) {
   const [lead, setLead] = useState<Lead | null>(null);
   const [msgs, setMsgs] = useState<Message[]>([]);
   const [handoff, setHandoff] = useState<Handoff | null>(null);
@@ -118,10 +118,11 @@ function Thread({ id }: { id: string }) {
     <>
       <div className="thread">
         <div className="thread-head">
+          <button className="btn ghost sm back-btn" aria-label="Voltar" onClick={onBack}><ArrowLeft size={18} /></button>
           <Avatar name={displayName(lead)} />
           <div className="who"><b>{displayName(lead)}</b><span>{fmtPhone(lead.phone)}{lead.company ? ` · ${lead.company}` : ""}</span></div>
           <StageBadge stage={lead.stage} />
-          <Link className="btn sm" href={`/leads/${lead.id}`}><ExternalLink size={14} />Ficha</Link>
+          <Link className="btn sm" href={`/leads/${lead.id}`}><ExternalLink size={14} /><span className="hide-sm">Ficha</span></Link>
         </div>
         <AiStrip lead={lead} reason={handoff?.reason} onChange={load} />
         {handoff?.summary && lead.ai_paused && <div style={{ padding: "8px 16px", fontSize: 13, background: "var(--panel)", borderBottom: "1px solid var(--border)" }}><b>Resumo do Pedro:</b> {handoff.summary}</div>}

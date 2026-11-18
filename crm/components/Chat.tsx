@@ -88,7 +88,7 @@ export function Composer({ lead, onSent }: { lead: Lead; onSent: () => void }) {
       <div className="bar">
         <textarea
           rows={2}
-          placeholder="Escreva uma mensagem para o lead…  (Enter envia, Shift+Enter quebra linha)"
+          placeholder="Escreva uma mensagem…"
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
@@ -96,7 +96,7 @@ export function Composer({ lead, onSent }: { lead: Lead; onSent: () => void }) {
         <button className="btn primary" disabled={busy || !text.trim()} onClick={send}><Send size={15} />{busy ? "Enviando…" : "Enviar"}</button>
       </div>
       {err ? <div className="hint" style={{ color: "var(--danger)" }}>{err}</div>
-        : <div className="hint">A mensagem sai pelo WhatsApp do atendimento.{!lead.ai_paused && " Ao enviar, o Pedro pausa neste lead até você devolver."}</div>}
+        : <div className="hint">Enter envia, Shift+Enter quebra linha. A mensagem sai pelo WhatsApp do atendimento.{!lead.ai_paused && " Ao enviar, o Pedro pausa neste lead até você devolver."}</div>}
     </div>
   );
 }

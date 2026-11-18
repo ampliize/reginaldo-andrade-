@@ -198,16 +198,16 @@ function ConfigEditor() {
     <div className="card">
       <h3>Parâmetros do agente</h3>
       <div className="table-wrap">
-        <table>
+        <table className="stack plain">
           <thead><tr><th>Parâmetro</th><th>Valor</th><th></th></tr></thead>
           <tbody>
             {rows.map((c) => (
               <tr key={c.chave}>
                 <td style={{ maxWidth: 320 }}><b>{c.chave}</b><div className="muted" style={{ fontSize: 12 }}>{c.descricao}</div></td>
-                <td style={{ minWidth: 260 }}>
+                <td className="full" style={{ minWidth: 260 }}>
                   <input style={{ width: "100%" }} value={draft[c.chave] ?? ""} onChange={(e) => setDraft({ ...draft, [c.chave]: e.target.value })} />
                 </td>
-                <td><button className="btn" onClick={() => save(c)}>Salvar</button></td>
+                <td className="actions"><button className="btn" onClick={() => save(c)}>Salvar</button></td>
               </tr>
             ))}
           </tbody>

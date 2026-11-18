@@ -51,24 +51,24 @@ function LeadsInner() {
             <option value="">Todas as etapas</option>
             {STAGES.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}
           </select>
-          <button className="btn" onClick={exportCsv}><Download size={15} />Exportar CSV</button>
+          <button className="btn" onClick={exportCsv}><Download size={15} /><span className="hide-sm">Exportar </span>CSV</button>
         </div>
       </div>
       <div className="card p0 table-wrap">
         {filtered.length === 0 ? <Empty icon={<Users size={28} />} title="Nenhum lead encontrado" /> : (
           <table>
-            <thead><tr><th>Lead</th><th>Empresa</th><th>Colab.</th><th>Interesse</th><th>Etapa</th><th>Com</th><th>Última msg</th><th>Entrou</th></tr></thead>
+            <thead><tr><th>Lead</th><th className="hide-sm">Empresa</th><th className="hide-md">Colab.</th><th className="hide-md">Interesse</th><th>Etapa</th><th className="hide-sm">Com</th><th className="hide-md">Última msg</th><th className="hide-md">Entrou</th></tr></thead>
             <tbody>
               {filtered.map((l) => (
                 <tr key={l.id} className="click" onClick={() => router.push(`/leads/${l.id}`)}>
                   <td><div className="row" style={{ gap: 10 }}><Avatar name={displayName(l)} size="sm" /><div><b>{displayName(l)}</b><div className="muted" style={{ fontSize: 12 }}>{fmtPhone(l.phone)}</div></div></div></td>
-                  <td>{l.company ?? "—"}<div className="muted" style={{ fontSize: 12 }}>{label(l.segment)}</div></td>
-                  <td>{l.employees ?? "—"}</td>
-                  <td>{label(l.service_interest)}</td>
+                  <td className="hide-sm">{l.company ?? "—"}<div className="muted" style={{ fontSize: 12 }}>{label(l.segment)}</div></td>
+                  <td className="hide-md">{l.employees ?? "—"}</td>
+                  <td className="hide-md">{label(l.service_interest)}</td>
                   <td><StageBadge stage={l.stage} /></td>
-                  <td>{l.ai_paused ? <span className="badge amber"><Hand size={11} />Equipe</span> : <span className="badge brand"><Bot size={11} />IA</span>}</td>
-                  <td>{timeAgo(l.last_inbound_at)}</td>
-                  <td>{fmtDateTime(l.created_at)}</td>
+                  <td className="hide-sm">{l.ai_paused ? <span className="badge amber"><Hand size={11} />Equipe</span> : <span className="badge brand"><Bot size={11} />IA</span>}</td>
+                  <td className="hide-md">{timeAgo(l.last_inbound_at)}</td>
+                  <td className="hide-md">{fmtDateTime(l.created_at)}</td>
                 </tr>
               ))}
             </tbody>

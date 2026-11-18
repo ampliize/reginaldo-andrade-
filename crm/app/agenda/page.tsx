@@ -46,18 +46,18 @@ function Inner() {
         </div>
       </div>
       <div className="card p0 table-wrap">
-        <table>
+        <table className="stack">
           <thead><tr><th>Quando</th><th>Lead</th><th>Empresa</th><th>Desafio</th><th>Status</th><th></th></tr></thead>
           <tbody>
             {rows.map((m) => (
               <tr key={m.id}>
-                <td><b>{new Date(m.start_at).toLocaleString("pt-BR", { weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</b>
+                <td data-label="Quando"><b>{new Date(m.start_at).toLocaleString("pt-BR", { weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</b>
                   {m.meet_url && <div><a href={m.meet_url} target="_blank" rel="noreferrer" style={{ color: "var(--brand)" }}>Google Meet</a></div>}</td>
-                <td><Link href={`/leads/${m.lead_id}`}><b>{displayName(m.leads)}</b></Link></td>
-                <td>{m.leads.company ?? "—"}{m.leads.employees ? <div className="muted">{m.leads.employees} colaboradores</div> : null}</td>
-                <td style={{ maxWidth: 320 }}>{m.leads.challenge ?? "—"}</td>
-                <td><span className="badge">{label("reuniao_" + m.status)}</span></td>
-                <td style={{ whiteSpace: "nowrap" }}>
+                <td data-label="Lead"><Link href={`/leads/${m.lead_id}`}><b>{displayName(m.leads)}</b></Link></td>
+                <td data-label="Empresa">{m.leads.company ?? "—"}{m.leads.employees ? <div className="muted">{m.leads.employees} colaboradores</div> : null}</td>
+                <td data-label="Desafio" style={{ maxWidth: 320 }}>{m.leads.challenge ?? "—"}</td>
+                <td data-label="Status"><span className="badge">{label("reuniao_" + m.status)}</span></td>
+                <td className="actions" style={{ whiteSpace: "nowrap" }}>
                   {tab === "passadas" && (m.status === "agendada" || m.status === "remarcada") && (
                     <>
                       <button className="btn" onClick={() => setStatus(m, "realizada")}>Realizada</button>{" "}

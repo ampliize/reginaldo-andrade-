@@ -231,18 +231,118 @@ dl.fields dd { margin: 0; }
 .search input { padding-left: 34px; min-width: 240px; }
 .toast { position: fixed; bottom: 20px; right: 20px; background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); z-index: 50; }
 
-@media (max-width: 1200px) { .inbox { grid-template-columns: 300px 1fr; } .side { display: none; } }
-@media (max-width: 900px) {
-  .app { grid-template-columns: 1fr; }
-  .sidebar { position: static; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; padding: 10px 16px; }
-  .sidebar .spacer, .nav-label, .me .who { display: none; }
-  .brand { padding: 0 8px 0 0; }
-  .nav { display: flex; flex-wrap: wrap; gap: 2px; }
-  .main { padding: 16px; }
-  .two, .three { grid-template-columns: 1fr; }
-  .inbox { grid-template-columns: 1fr; height: auto; }
-  .inbox-list { max-height: 45vh; }
-  .thread { height: 70vh; }
-  .funnel-row { grid-template-columns: 100px 1fr 70px; }
+/* itens de grid/flex não podem crescer além da tela por causa de conteúdo largo */
+.grid > *, .inbox > *, .app > *, .three > *, .two > * { min-width: 0; }
+.seg { flex-shrink: 0; }
+.seg button { white-space: nowrap; }
+.inbox-list .seg { overflow-x: auto; max-width: 100%; scrollbar-width: none; }
+
+/* ---------- elementos só do celular (escondidos no desktop) ---------- */
+.topbar, .scrim, .close-menu, .move-sm, .back-btn { display: none; }
+.brand-mark.sm { width: 28px; height: 28px; border-radius: 8px; font-size: 13px; }
+.chat-card { display: flex; flex-direction: column; overflow: hidden; height: calc(100vh - 190px); min-height: 520px; }
+.chat-card > div:nth-last-child(2) { background: var(--panel-2); flex: 1; min-height: 0; display: flex; }
+.chat-card .chat { width: 100%; }
+.intro { margin: -8px 0 16px; }
+.heat-wrap { overflow-x: auto; }
+.heat { min-width: 520px; }
+
+/* ---------- notebook / tablet deitado ---------- */
+@media (max-width: 1280px) {
+  .inbox { grid-template-columns: 300px 1fr; }
+  .side { display: none; }
+}
+
+/* ---------- tablet: menu vira gaveta ---------- */
+@media (max-width: 1024px) {
+  .app { display: block; }
+  .topbar {
+    display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 30;
+    height: 56px; padding: 0 12px; background: var(--panel); border-bottom: 1px solid var(--border);
+  }
+  .topbar b { font-size: 15px; }
+  .topbar .count { margin-left: auto; font-size: 11px; font-weight: 600; min-width: 22px; height: 22px; padding: 0 7px; border-radius: 999px; display: grid; place-items: center; background: var(--danger); color: #fff; }
+  .sidebar {
+    position: fixed; top: 0; left: 0; bottom: 0; width: 280px; max-width: 85vw; height: 100vh; z-index: 50;
+    transform: translateX(-100%); transition: transform .22s ease; box-shadow: var(--shadow-lg); overflow-y: auto;
+  }
+  .menu-open .sidebar { transform: none; }
+  .scrim { display: block; position: fixed; inset: 0; background: rgba(15, 23, 42, .45); z-index: 40; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .menu-open .scrim { opacity: 1; pointer-events: auto; }
+  .close-menu { display: inline-flex; position: absolute; top: 14px; right: 10px; }
+  .main { padding: 20px; }
+  .hide-md { display: none !important; }
+  .three { grid-template-columns: 1fr; }
+  .kpis { grid-template-columns: repeat(3, 1fr); }
+  .inbox { height: calc(100vh - 56px); }
+  .chat-card { height: 70vh; min-height: 460px; }
+}
+
+/* ---------- celular ---------- */
+@media (max-width: 700px) {
+  body { font-size: 14px; }
+  input, select, textarea { font-size: 16px; }
+  .main { padding: 14px; }
+  .hide-sm { display: none !important; }
+  .card { padding: 14px; border-radius: 12px; }
+  .grid { gap: 12px; }
+  .two { grid-template-columns: 1fr; }
+  .kpis { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi .v { font-size: 22px; }
+  .kpi .ico { width: 28px; height: 28px; }
+  .kpi .top { font-size: 12px; }
+
+  .page-head { flex-direction: column; align-items: stretch; margin-bottom: 14px; }
+  .page-head h1 { font-size: 20px; }
+  .toolbar { width: 100%; }
+  .toolbar > * { flex: 1 1 auto; }
+  .search { width: 100%; flex-basis: 100%; }
   .search input { min-width: 0; width: 100%; }
+  .seg { overflow-x: auto; max-width: 100%; scrollbar-width: none; }
+  .seg button { flex: 1 0 auto; }
+
+  .funnel-row { grid-template-columns: 1fr 64px; gap: 4px 10px; }
+  .funnel-row .lbl { grid-column: 1 / -1; }
+  .funnel-row .bar-bg { height: 24px; }
+
+  /* pipeline: colunas deslizam de lado, uma por vez */
+  .pipeline { grid-auto-columns: 86vw; scroll-snap-type: x mandatory; margin: 0 -14px; padding: 0 14px 12px; gap: 10px; }
+  .stage-col { scroll-snap-align: start; max-height: calc(100vh - 260px); }
+  .deal { cursor: pointer; }
+  .move-sm { display: block; width: 100%; margin-top: 10px; font-size: 14px; padding: 6px 10px; }
+
+  /* conversas: lista OU conversa, com voltar */
+  .inbox { grid-template-columns: 1fr; height: calc(100vh - 56px); }
+  .inbox.has-sel .inbox-list { display: none; }
+  .inbox:not(.has-sel) .thread { display: none; }
+  .inbox-list { max-height: none; }
+  .thread { height: 100%; }
+  .back-btn { display: inline-flex; margin-left: -6px; }
+  .thread-head { padding: 10px 12px; gap: 8px; }
+  .thread-head .badge { display: none; }
+  .ai-strip { flex-wrap: wrap; padding: 8px 12px; }
+  .ai-strip span { flex: 1 1 60%; }
+  .chat { padding: 12px; }
+  .bubble { max-width: 86%; }
+  .composer { padding: 10px 12px; }
+  .composer .hint { display: none; }
+  .composer .btn { padding: 10px 12px; }
+
+  .chat-card { height: 75vh; min-height: 420px; }
+  dl.fields { grid-template-columns: 110px 1fr; }
+
+  /* tabelas viram cartões */
+  table.stack thead { display: none; }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  table.stack td { border: 0; padding: 3px 0; max-width: none !important; min-width: 0 !important; }
+  table.stack td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  table.stack td.actions { padding-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  table.stack.plain tr { padding: 12px 0; }
+  table.stack td.full input { width: 100%; }
+  .card.p0 table th:first-child, .card.p0 table td:first-child { padding-left: 0; }
+  .card.p0 table.stack td:first-child { padding-left: 0; }
+  .card.p0 table:not(.stack) td:first-child, .card.p0 table:not(.stack) th:first-child { padding-left: 14px; }
+
+  .login form { padding: 22px; }
 }

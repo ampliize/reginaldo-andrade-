@@ -198,7 +198,7 @@ function DashboardInner() {
           <div className="grid three">
             <div className="card">
               <h3>Quando os leads chamam <small>mensagens recebidas por dia e hora</small></h3>
-              <div className="heat">
+              <div className="heat-wrap"><div className="heat">
                 <span />{Array.from({ length: 24 }, (_, h) => <span key={h} style={{ textAlign: "center" }}>{h % 3 === 0 ? h : ""}</span>)}
                 {DOW.map((d, di) => (
                   <Fragment key={d}>
@@ -209,7 +209,7 @@ function DashboardInner() {
                     })}
                   </Fragment>
                 ))}
-              </div>
+              </div></div>
             </div>
             <div className="card">
               <h3>Atendimento automático</h3>
